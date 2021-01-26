@@ -1,0 +1,12 @@
+{
+  "name": "OutdoorTime",
+  "displayName": "OutdoorTime",
+  "expo": {
+    "name": "OutdoorTime",
+    "slug": "OutdoorTime",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
