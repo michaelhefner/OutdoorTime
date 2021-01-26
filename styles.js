@@ -19,11 +19,11 @@ export default styles = StyleSheet.create({
         // justifyContent: 'center',
     },
     button: {
-        minWidth: '100%',
         backgroundColor: 'rgba(255,255,255, .85)',
         justifyContent: 'center',
         alignSelf: 'center',
-        padding: 5,
+        paddingVertical: 5,
+        paddingHorizontal: 20,
         margin: 5,
     },
     shadow: {
@@ -51,14 +51,12 @@ export default styles = StyleSheet.create({
         backgroundColor: 'rgba(255,255,255, .9)',
         borderRadius: 10,
         margin: 10,
-        marginLeft: 50,
-        marginRight: 50,
         fontSize: 32,
         textAlign: 'left',
         height: 50,
         padding: 6,
-        width: '100%',
-        color: 'rgba(255, 255, 255, .7)',
+        minWidth: '100%',
+        color: 'rgba(5, 5, 5, .7)',
     },
     scrollView: {
         backgroundColor: Colors.lighter,
@@ -71,6 +69,9 @@ export default styles = StyleSheet.create({
         fontSize: 24,
         color: '#fff',
         alignSelf: 'flex-start',
+    },
+    formContainer:{
+        padding: 30,
     },
     container: {
         backgroundColor: 'rgba(25, 25, 25, .8)',

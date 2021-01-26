@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 import { Text, TextInput, View } from 'react-native';
 import { connect } from 'react-redux';
-import { loginUser, updateToken } from './actions';
+import { updateUserStatus } from './actions';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import styles from '../styles';
 
 
-const LoginUserForm = ({ user, loginSuccess }) => {
+const LoginUserForm = ({ user, onUserStatusChange }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [token, setToken] = useState('');
     const checkCredential = () => {
-
         if (email.length > 0 && password.length > 0) {
-
             fetch('https://michaelhefner.com/services/auth/login', {
                 method: 'POST',
                 headers: {
@@ -26,7 +24,7 @@ const LoginUserForm = ({ user, loginSuccess }) => {
             })
                 .then((res) => {
                     if (res.status !== 200) {
-                        loginSuccess({ isLoggedIn: false, token: '' });
+                        clearStoreInfo();
 
                         return null;
                     }
@@ -34,21 +32,23 @@ const LoginUserForm = ({ user, loginSuccess }) => {
                 })
                 .then((response) => response.token)
                 .then((res) => {
-                    loginSuccess({ isLoggedIn: true, token: res });
-                    setEmail('');
-                    setPassword('');
+                    onUserStatusChange({ isLoggedIn: true, token: res, userName: email });
+                    clearInputFields();
                     // navigation.navigate('Home', {name: 'Home'});
                 })
                 .catch((err) => {
-                    loginSuccess({ isLoggedIn: false, token: '' });
-                    setEmail('');
-                    setPassword('');
-
+                    clearStoreInfo();
+                    clearInputFields();
                 });
         }
     }
+    const clearInputFields = () => {
+        setEmail('');
+        setPassword('');
+    }
+    const clearStoreInfo = () => onUserStatusChange({ isLoggedIn: false, token: '', userName: '' });
     return (
-        <View style={[styles.container, {}]}>
+        <View style={[styles.formContainer, {}]}>
             <Text style={styles.header}>Log in</Text>
             <Text style={styles.inputLabel}>
                 Email
@@ -73,7 +73,7 @@ const LoginUserForm = ({ user, loginSuccess }) => {
                 style={[styles.button, styles.shadow, styles.submitButton]}
                 onPress={checkCredential}
             ><Text style={styles.text}>Submit</Text></TouchableOpacity>
-            <Text style={{ color: "#fff" }}>Token: {user.token}</Text>
+            <Text style={{ color: "#fff" }}>User Name: {user.userName} Token: {user.token}</Text>
 
         </View>
     )
@@ -84,7 +84,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    loginSuccess: text => dispatch(loginUser(text)),
+    onUserStatusChange: text => dispatch(updateUserStatus(text)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginUserForm);

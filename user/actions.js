@@ -1,5 +1,5 @@
-export const LOGIN_USER = 'LOGIN_USER';
-export const loginUser = text => ({
-    type: LOGIN_USER,
+export const UPDATE_USER_STATUS = 'UPDATE_USER_STATUS';
+export const updateUserStatus = text => ({
+    type: UPDATE_USER_STATUS,
     payload: { text },
 });

@@ -6,7 +6,7 @@ import { Text, View } from 'react-native';
 import styles from '../styles';
 
 
-const User = ({ user = {}, onLoginPressed, onLogoutPressed }) => {
+const User = ({ user}) => {
     return (
         <View style={styles.container}>
             <LoginUserForm />

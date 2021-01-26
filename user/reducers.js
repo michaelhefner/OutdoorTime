@@ -1,11 +1,12 @@
-import { LOGIN_USER, UPDATE_TOKEN } from './actions';
+import { UPDATE_USER_STATUS } from './actions';
 
-export const user = (state = [], action) => {
+const initState = {isLoggedIn: false, token: '', userName: ''}
+export const user = (state = initState, action) => {
     const { type, payload } = action;
     const { text } = payload || '';
 
     switch (type) {
-        case LOGIN_USER:
+        case UPDATE_USER_STATUS:
             return { ...user, ...text };
         default:
             return state;
