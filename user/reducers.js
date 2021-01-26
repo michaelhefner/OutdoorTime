@@ -1,4 +1,4 @@
-import { LOGIN_USER, LOGOUT_USER } from './actions';
+import { LOGIN_USER, UPDATE_TOKEN } from './actions';
 
 export const user = (state = [], action) => {
     const { type, payload } = action;
@@ -6,9 +6,7 @@ export const user = (state = [], action) => {
 
     switch (type) {
         case LOGIN_USER:
-            return { ...user, isLoggedIn: text };
-        case LOGOUT_USER:
-            return { ...user, isLoggedIn: text };
+            return { ...user, ...text };
         default:
             return state;
     }
