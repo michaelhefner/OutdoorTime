@@ -1,5 +1,6 @@
 import React from 'react';
 import Login from './src/user/Login';
+import Register from './src/user/Register';
 import Home from './src/home/Home';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -17,6 +18,7 @@ const App = () => {
         <Stack.Navigator>
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Register" component={Register} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

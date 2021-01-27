@@ -6,13 +6,14 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import styles from '../../styles';
 
 
-const User = ({ navigation, user, onUserStatusChange }) => {
+const Register = ({ navigation, user, onUserStatusChange }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [token, setToken] = useState('');
     const checkCredential = async () => {
         if (email.length > 0 && password.length > 0) {
-            await fetch('https://michaelhefner.com/services/auth/login', {
+            await fetch('https://michaelhefner.com/services/auth/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -20,6 +21,7 @@ const User = ({ navigation, user, onUserStatusChange }) => {
                 body: JSON.stringify({
                     email: email,
                     password: password,
+                    confirmPassword: confirmPassword,
                 }),
             })
                 .then((res) => {
@@ -49,9 +51,8 @@ const User = ({ navigation, user, onUserStatusChange }) => {
     const clearStoreInfo = () => onUserStatusChange({ isLoggedIn: false, token: '', userName: '' });
     return (
         <View style={styles.container}>
-
             <View style={[styles.formContainer, {}]}>
-                <Text style={styles.header}>Log in</Text>
+                <Text style={styles.header}>Register</Text>
                 <Text style={styles.inputLabel}>
                     Email
             </Text>
@@ -71,6 +72,16 @@ const User = ({ navigation, user, onUserStatusChange }) => {
                     value={password}
                     onChangeText={text => setPassword(text)}
                 />
+                <Text style={styles.inputLabel}>
+                    Confirm Password
+            </Text>
+                <TextInput
+                    style={[styles.inputText, styles.shadow,]}
+                    placeholder="ConfirmPassword"
+                    secureTextEntry={true}
+                    value={confirmPassword}
+                    onChangeText={text => setConfirmPassword(text)}
+                />
                 <TouchableOpacity
                     style={[styles.button, styles.shadow, styles.submitButton]}
                     onPress={checkCredential}
@@ -89,4 +100,4 @@ const mapDispatchToProps = dispatch => ({
     onUserStatusChange: text => dispatch(updateUserStatus(text)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(User);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

@@ -38,6 +38,12 @@ export default styles = StyleSheet.create({
         padding: 5,
         color: 'rgba(0,0,0,1)'
     },
+    buttonText:{
+        fontSize:32,
+        alignSelf: 'center',
+        padding: 5,
+        color: 'rgba(255,255,255, .8)'
+    },
     centerAll: {
         flex: 1,
         display: 'flex',
@@ -45,6 +51,7 @@ export default styles = StyleSheet.create({
     },
     submitButton: {
         backgroundColor: 'rgba(25, 150, 25, .8)',
+        color: "#fff",
     },
     inputText: {
         // backgroundColor: 'rgba(0,0,0, .1)',
