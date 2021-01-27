@@ -1,6 +1,6 @@
 import { UPDATE_USER_STATUS } from './actions';
 
-const initState = {isLoggedIn: false, token: '', userName: ''}
+const initState = {isLoggedIn: false, token: '', userName: ''};
 export const user = (state = initState, action) => {
     const { type, payload } = action;
     const { text } = payload || '';

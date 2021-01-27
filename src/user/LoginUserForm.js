@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { Text, TextInput, View } from 'react-native';
 import { connect } from 'react-redux';
-import { updateUserStatus } from './actions';
+import { updateUserStatus } from '../redux/actions';
 import { TouchableOpacity } from "react-native-gesture-handler";
-import styles from '../styles';
+import styles from '../../styles';
 
 
-const LoginUserForm = ({ user, onUserStatusChange }) => {
+const LoginUserForm = ({ navigation, user, onUserStatusChange }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [token, setToken] = useState('');
-    const checkCredential = () => {
+    const checkCredential = async () => {
         if (email.length > 0 && password.length > 0) {
-            fetch('https://michaelhefner.com/services/auth/login', {
+            await fetch('https://michaelhefner.com/services/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -34,12 +34,12 @@ const LoginUserForm = ({ user, onUserStatusChange }) => {
                 .then((res) => {
                     onUserStatusChange({ isLoggedIn: true, token: res, userName: email });
                     clearInputFields();
-                    // navigation.navigate('Home', {name: 'Home'});
                 })
                 .catch((err) => {
                     clearStoreInfo();
                     clearInputFields();
                 });
+                navigation.goBack();
         }
     }
     const clearInputFields = () => {
